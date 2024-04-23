@@ -1,6 +1,9 @@
 # images/compressed/* contains outputted images
 images/compressed/*
 
+# images/uncompressed/grayscale* contains grayscale images
+images/uncompressed/grayscale*
+
 # visualize.html contains the outputted html file
 visualize.html
 

@@ -4,6 +4,10 @@ import os
 import webbrowser
 from PIL import Image
 
+# Clear out images/compressed folder
+for file in os.listdir("images/compressed"):
+    os.remove("images/compressed/" + file)
+
 # Ask the user for the name of the image file
 image_file = input("[↦ ] Enter the name of the image file (with extension): ")
 image_file_no_extension = image_file.split(".")[0]
@@ -73,11 +77,14 @@ with open("visualize.html", "w") as file:
 
 # Plot the file size
 plt.figure()
-plt.scatter(x_values, sizes, c='r', label='Compressed Image Size')
-plt.plot(x_values, sizes, label='Trendline')
+plt.scatter(x_values, sizes, c='r')
+plt.plot(x_values, sizes)
 plt.xlabel("Number of Singular Values")
 plt.ylabel("File Size (kB)")
 plt.title("File Size vs Number of Singular Values")
 plt.show()
+
+# Open visualization explorer
+webbrowser.open('visualize.html')
 
 print("[✓] Done.")
