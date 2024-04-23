@@ -1,3 +1,12 @@
+# images/compressed/* contains outputted images
+images/compressed/*
+
+# visualize.html contains the outputted html file
+visualize.html
+
+# data/* contains created singular value CSV file
+data/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
