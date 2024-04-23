@@ -38,12 +38,16 @@ print("[✓] Singular values have been written to file (data/sigma.csv).")
 max_singular_values = len(sigma)
 print("[✓] A total of", max_singular_values, "singular values are present in the image.")
 
+# Exclude the full original image.
+max_singular_values -= 1
+
 sizes = []
 x_values = []
 
 def compress_image(i):
     print("[↦ ] Compressing image with", i, "singular values... ", i, "/", max_singular_values)
     reconstimg = np.matrix(U[:, :i]) * np.diag(sigma[:i]) * np.matrix(V[:i, :])
+
     # save to file
     filename = 'images/compressed/' + str(i) + '_' + image_file
     im = Image.fromarray(reconstimg)

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 
-<h4>Uncompressed (left) vs. Compressed (right)</h4>
+<h3>Uncompressed (left) vs. Compressed (right)</h3>
 <img id="uncompressed" src="#placeholder" width="600px">
 <img id="compressed" src="#placeholder" width="600px">
+<br>
+<progress id="progress" value="0" max="100" style="width: 1200px; height: 30px"></progress>
 
-<h4> Number of singular values included: <span id="i-val"></span> </h4>
+<h4> Number of singular values included: <span id="i-val"></span><span id="total-val"></span> </h4>
 
 
 <script>
@@ -13,10 +15,17 @@
 
 const img = document.getElementById('compressed');
 const i_val = document.getElementById('i-val');
+const total_val = document.getElementById('total-val');
+
+total_val.innerText = ` / ${numbers[numbers.length - 1]}`;
 
 // Set up control image (uncompressed)
 const img_uncompressed = document.getElementById('uncompressed');
 img_uncompressed.src = "images/uncompressed/grayscale_{{filename}}";
+
+// Set up progress bar
+const progress = document.getElementById('progress');
+progress.value = 0;
 
 // On spacebar press, stop the animation
 document.addEventListener('keydown', (e) => {
@@ -28,12 +37,16 @@ document.addEventListener('keydown', (e) => {
 // Every 0.25 seconds, change the image to the next compressed image
 let flag_stop = false;
 let i = 0;
+
+let final_val = numbers[numbers.length - 1];
+
 setInterval(() => {
     if (flag_stop) return;
     const filename = "{{filename}}";
     const imgPath = `images/compressed/${numbers[i]}_${filename}`;
     img.src = imgPath;
     i_val.innerText = numbers[i];
+    progress.value = numbers[i] / final_val * 100;
     i = (i + 1) % numbers.length;
 }, 100);
 </script>
